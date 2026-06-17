@@ -439,7 +439,7 @@ function computeResult(answers) {
 
 function Attribution() {
   return (
-    <p style={{ textAlign: "center", color: "rgba(245,236,215,0.35)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", marginTop: "2.5rem", letterSpacing: "0.04em" }}>
+    <p style={{ textAlign: "center", color: "rgba(245,236,215,0.35)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", marginTop: "2rem", letterSpacing: "0.04em" }}>
       A little project by{" "}
       <a href="https://www.linkedin.com/in/jasonsosnovsky" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(245,236,215,0.55)", textDecoration: "underline" }}>
         Jason Sosnovsky
@@ -587,7 +587,7 @@ function LandingScreen({ onStart }) {
           12 questions to discover which animal archetype<br />explains how you lead at home, at work, and at play.
         </p>
 
-        <div style={{ marginTop: "2.5rem", marginBottom: "1rem" }}>
+        <div style={{ marginTop: "2.5rem", marginBottom: "2rem" }}>
           <p style={{ color: "#C8860A", fontSize: "16px", letterSpacing: "0.2em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", textAlign: "center", marginBottom: "0.5rem" }}>
             The Archetypes
           </p>
