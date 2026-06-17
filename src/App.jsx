@@ -647,6 +647,19 @@ function QuizScreen({ onComplete }) {
     setSelected(option);
   }
 
+  function handleBack() {
+    if (current === 0 || animating) return;
+    setAnimating(true);
+    setVisible(false);
+    setTimeout(() => {
+      setAnswers(answers.slice(0, -1));
+      setCurrent(current - 1);
+      setSelected(answers[current - 1]);
+      setVisible(true);
+      setAnimating(false);
+    }, 400);
+  }
+
   function handleNext() {
     if (!selected || animating) return;
     setAnimating(true);
@@ -743,7 +756,28 @@ function QuizScreen({ onComplete }) {
           })}
         </div>
 
-        <div style={{ marginTop: "1.75rem", textAlign: "right" }}>
+        <div style={{ marginTop: "1.75rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          {current > 0 ? (
+            <button
+              onClick={handleBack}
+              style={{
+                background: "rgba(245,236,215,0.04)",
+                border: "none",
+                color: "rgba(245,236,215,0.5)",
+                fontSize: "0.9rem",
+                fontFamily: "'DM Sans', sans-serif",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                padding: "0.875rem 2rem",
+                borderRadius: "2px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+            >
+              ← Back
+            </button>
+          ) : <div />}
           <button
             onClick={handleNext}
             disabled={!selected}
