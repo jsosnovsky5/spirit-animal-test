@@ -437,6 +437,17 @@ function computeResult(answers) {
 
 // ─── COMPONENTS ───────────────────────────────────────────────────────────────
 
+function Attribution() {
+  return (
+    <p style={{ textAlign: "center", color: "rgba(245,236,215,0.35)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", marginTop: "2.5rem", letterSpacing: "0.04em" }}>
+      A little project by{" "}
+      <a href="https://www.linkedin.com/in/jasonsosnovsky" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(245,236,215,0.55)", textDecoration: "underline" }}>
+        Jason Sosnovsky
+      </a>
+    </p>
+  );
+}
+
 function GrainOverlay() {
   return (
     <div
@@ -629,6 +640,7 @@ function LandingScreen({ onStart }) {
         </p>
       </div>
       {activeArchetype && <ArchetypeModal archetype={activeArchetype} onClose={() => setActiveArchetype(null)} />}
+      <Attribution />
     </div>
   );
 }
@@ -991,6 +1003,8 @@ function ResultScreen({ answers, onRetake }) {
             Share the Test
           </button>
         </div>
+
+        <Attribution />
 
         <div style={{ textAlign: "center" }}>
           <button
