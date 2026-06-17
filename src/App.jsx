@@ -1004,8 +1004,6 @@ function ResultScreen({ answers, onRetake }) {
           </button>
         </div>
 
-        <Attribution />
-
         <div style={{ textAlign: "center" }}>
           <button
             onClick={onRetake}
@@ -1026,6 +1024,7 @@ function ResultScreen({ answers, onRetake }) {
             ↩ Retake the Test
           </button>
         </div>
+        <Attribution />
       </div>
     </div>
   );
