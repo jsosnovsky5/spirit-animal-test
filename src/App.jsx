@@ -571,7 +571,7 @@ function LandingScreen({ onStart }) {
           fontFamily: "'Cormorant Garamond', Georgia, serif",
           letterSpacing: "-0.01em",
         }}>
-          😄 Spirit Animal 😄<br />
+          Spirit Animal<br />
           <em style={{ color: "#C8860A", fontStyle: "italic" }}>Leadership Test</em>
         </h1>
 
@@ -1017,6 +1017,45 @@ function ResultScreen({ answers, onRetake }) {
             }}
           >
             Share the Test
+          </button>
+          <button
+            onClick={() => {
+              const subject = `My Spirit Animal: The ${p.name}`;
+              const secondaryLine = s ? `Secondary Archetype: The ${s.name} — ${s.tagline}\n\n` : "";
+              const strengthsList = p.strengths.join(", ");
+              const pairingsList = p.pairs_well.join(", ");
+              const body =
+`My Spirit Animal Leadership Result
+===================================
+
+${p.emoji} The ${p.name} — ${p.tagline}
+
+${p.description}
+
+At My Best: ${p.at_best}
+At My Edge: ${p.at_worst}
+
+Core Strengths: ${strengthsList}
+
+${secondaryLine}Pairs Well With: ${pairingsList}
+
+Take the test: ${window.location.origin}`;
+              window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }}
+            style={{
+              background: "rgba(60,90,50,0.25)",
+              border: "1px solid rgba(80,120,60,0.45)",
+              borderRadius: "4px",
+              color: "rgba(160,200,140,0.8)",
+              fontSize: "0.8rem",
+              fontFamily: "'DM Sans', sans-serif",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              padding: "0.65rem 1.5rem",
+              cursor: "pointer",
+            }}
+          >
+            Share My Results
           </button>
           <button
             onClick={onRetake}
