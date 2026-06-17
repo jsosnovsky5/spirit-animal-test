@@ -571,7 +571,7 @@ function LandingScreen({ onStart }) {
           fontFamily: "'Cormorant Garamond', Georgia, serif",
           letterSpacing: "-0.01em",
         }}>
-          Spirit Animal<br />
+          😄 Spirit Animal 😄<br />
           <em style={{ color: "#C8860A", fontStyle: "italic" }}>Leadership Test</em>
         </h1>
 
@@ -897,6 +897,22 @@ function ResultScreen({ answers, onRetake }) {
                 {s}
               </span>
             ))}
+          </div>
+        </div>
+
+        <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.5rem" }}>
+          <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Pairs Well With</p>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {p.pairs_well.map((name, i) => {
+              const key = Object.keys(ARCHETYPES).find(k => ARCHETYPES[k].name === name);
+              const a = ARCHETYPES[key];
+              return (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <span style={{ fontSize: "1.4rem" }}>{a.emoji}</span>
+                  <span style={{ color: "rgba(245,236,215,0.65)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem" }}>The {a.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
