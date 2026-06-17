@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { track } from "@vercel/analytics";
 
 // ─── ARCHETYPES ───────────────────────────────────────────────────────────────
 const ARCHETYPES = {
@@ -967,6 +968,7 @@ function ResultScreen({ answers, onRetake }) {
               const message = `What's your spirit animal? I'm ${article} ${archetype}.`;
               const url = window.location.origin;
               const fullText = `${message}\n${url}`;
+              track("share", { archetype });
               if (navigator.share) {
                 navigator.share({ text: fullText }).catch(() => {});
               } else {
