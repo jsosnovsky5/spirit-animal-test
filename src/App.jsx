@@ -971,7 +971,7 @@ function ResultScreen({ answers, onRetake }) {
         </div>
 
 
-        <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
           <button
             onClick={() => {
               const vowels = ["A","E","I","O","U"];
@@ -1002,9 +1002,6 @@ function ResultScreen({ answers, onRetake }) {
           >
             Share the Test
           </button>
-        </div>
-
-        <div style={{ textAlign: "center" }}>
           <button
             onClick={onRetake}
             style={{
