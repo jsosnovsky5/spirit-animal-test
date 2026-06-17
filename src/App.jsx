@@ -587,7 +587,7 @@ function LandingScreen({ onStart }) {
           12 questions to discover which animal archetype<br />explains how you lead at home, at work, and at play.
         </p>
 
-        <div style={{ marginTop: "2.5rem", marginBottom: "2.5rem" }}>
+        <div style={{ marginTop: "2.5rem", marginBottom: "1rem" }}>
           <p style={{ color: "#C8860A", fontSize: "16px", letterSpacing: "0.2em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", textAlign: "center", marginBottom: "0.5rem" }}>
             The Archetypes
           </p>
