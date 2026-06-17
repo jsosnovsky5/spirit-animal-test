@@ -523,8 +523,8 @@ function ArchetypeModal({ archetype, onClose }) {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
           {[
-            { label: "At your best", text: a.at_best, accent: "#4A7C59" },
-            { label: "At your edge", text: a.at_worst, accent: "#8B4513" },
+            { label: "Great Successes", text: a.at_best, accent: "#4A7C59" },
+            { label: "Great Failures", text: a.at_worst, accent: "#8B4513" },
           ].map((item, i) => (
             <div key={i} style={{ background: "rgba(245,236,215,0.04)", border: `1px solid ${item.accent}44`, borderRadius: "6px", padding: "1.25rem" }}>
               <p style={{ color: item.accent, fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{item.label}</p>
@@ -534,7 +534,7 @@ function ArchetypeModal({ archetype, onClose }) {
         </div>
 
         <div style={{ background: "rgba(245,236,215,0.03)", border: "1px solid rgba(245,236,215,0.08)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
-          <p style={{ color: "rgba(200,134,10,0.7)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Core Strengths</p>
+          <p style={{ color: "rgba(200,134,10,0.7)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>Core Strengths</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
             {a.strengths.map((str, i) => (
               <span key={i} style={{ background: `${a.color}22`, border: `1px solid ${a.color}44`, color: a.color, fontSize: "0.85rem", padding: "0.3rem 0.85rem", borderRadius: "20px" }}>{str}</span>
@@ -543,7 +543,7 @@ function ArchetypeModal({ archetype, onClose }) {
         </div>
 
         <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
-          <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Shadow Side</p>
+          <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Core Weaknesses</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
             {(Array.isArray(a.shadow) ? a.shadow : a.shadow.split(". ").filter(Boolean)).map((s, i) => (
               <span key={i} style={{ background: "transparent", border: "1px solid rgba(245,236,215,0.15)", color: "rgba(245,236,215,0.65)", fontSize: "0.85rem", padding: "0.3rem 0.85rem", borderRadius: "20px" }}>{s.replace(/\.$/, "")}</span>
@@ -569,7 +569,7 @@ function ArchetypeModal({ archetype, onClose }) {
 
         {a.famous && a.famous.length > 0 && (
           <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem" }}>
-            <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>Famous {a.plural || `${a.name}s`}</p>
+            <p style={{ color: "rgba(200,134,10,0.7)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "1rem" }}>Some Famous {a.plural || `${a.name}s`}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               {a.famous.map((person, i) => (
                 <div key={i}>
