@@ -471,19 +471,20 @@ function ArchetypeModal({ archetype, onClose }) {
       onClick={onClose}
       style={{
         position: "fixed", inset: 0, zIndex: 10000,
-        background: "rgba(0,0,0,0.6)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        padding: "1.5rem",
+        background: "rgba(0,0,0,0.75)",
+        display: "flex", alignItems: "flex-start", justifyContent: "center",
+        padding: "2rem 1.5rem",
+        overflowY: "auto",
       }}
     >
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          background: "linear-gradient(160deg, #1e1608 0%, #2a1e0e 100%)",
+          background: `linear-gradient(160deg, #0f0c06 0%, ${a.color}22 50%, #0a1a0a 100%)`,
           border: `1px solid ${a.color}44`,
           borderRadius: "8px",
-          padding: "2rem",
-          maxWidth: 480,
+          padding: "2.5rem",
+          maxWidth: 680,
           width: "100%",
           position: "relative",
           fontFamily: "'DM Sans', sans-serif",
@@ -493,7 +494,7 @@ function ArchetypeModal({ archetype, onClose }) {
           onClick={onClose}
           style={{
             position: "absolute", top: "1rem", right: "1rem",
-            background: "linear-gradient(160deg, #1a1208 0%, #2d1f0a 40%, #1a2d1a 100%)", border: "none",
+            background: "transparent", border: "none",
             color: "rgba(245,236,215,0.4)", fontSize: "1.2rem",
             cursor: "pointer", lineHeight: 1, padding: "0.25rem 0.5rem",
             transition: "color 0.2s ease",
@@ -503,19 +504,68 @@ function ArchetypeModal({ archetype, onClose }) {
         >
           ✕
         </button>
-        <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>{a.emoji}</div>
-        <h2 style={{
-          color: "#F5ECD7", fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontWeight: 300, fontSize: "1.8rem", marginBottom: "0.25rem",
-        }}>
-          The {a.name}
-        </h2>
-        <p style={{ color: a.color, fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "0.95rem", marginBottom: "1.25rem", letterSpacing: "0.05em" }}>
-          {a.tagline}
-        </p>
-        <p style={{ color: "rgba(245,236,215,0.75)", lineHeight: 1.75, fontFamily: "'Cormorant Garamond', serif", fontSize: "1.05rem" }}>
-          {a.description}
-        </p>
+
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <div style={{ fontSize: "4rem", marginBottom: "0.5rem" }}>{a.emoji}</div>
+          <h2 style={{ color: "#F5ECD7", fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 300, fontSize: "2.5rem", marginBottom: "0.25rem" }}>
+            The {a.name}
+          </h2>
+          <p style={{ color: a.color, fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", letterSpacing: "0.05em" }}>
+            {a.tagline}
+          </p>
+        </div>
+
+        <div style={{ background: "rgba(245,236,215,0.04)", border: `1px solid ${a.color}33`, borderRadius: "6px", padding: "1.5rem", marginBottom: "1.25rem" }}>
+          <p style={{ color: "rgba(245,236,215,0.85)", lineHeight: 1.8, margin: 0, fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem" }}>
+            {a.description}
+          </p>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+          {[
+            { label: "At your best", text: a.at_best, accent: "#4A7C59" },
+            { label: "At your edge", text: a.at_worst, accent: "#8B4513" },
+          ].map((item, i) => (
+            <div key={i} style={{ background: "rgba(245,236,215,0.04)", border: `1px solid ${item.accent}44`, borderRadius: "6px", padding: "1.25rem" }}>
+              <p style={{ color: item.accent, fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{item.label}</p>
+              <p style={{ color: "rgba(245,236,215,0.75)", lineHeight: 1.6, fontSize: "0.95rem", margin: 0, fontFamily: "'Cormorant Garamond', serif" }}>{item.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ background: "rgba(245,236,215,0.03)", border: "1px solid rgba(245,236,215,0.08)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
+          <p style={{ color: "rgba(200,134,10,0.7)", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Core Strengths</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+            {a.strengths.map((str, i) => (
+              <span key={i} style={{ background: `${a.color}22`, border: `1px solid ${a.color}44`, color: a.color, fontSize: "0.85rem", padding: "0.3rem 0.85rem", borderRadius: "20px" }}>{str}</span>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
+          <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Shadow Side</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+            {(Array.isArray(a.shadow) ? a.shadow : a.shadow.split(". ").filter(Boolean)).map((s, i) => (
+              <span key={i} style={{ background: "transparent", border: "1px solid rgba(245,236,215,0.15)", color: "rgba(245,236,215,0.65)", fontSize: "0.85rem", padding: "0.3rem 0.85rem", borderRadius: "20px" }}>{s.replace(/\.$/, "")}</span>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem" }}>
+          <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Pairs Well With</p>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            {a.pairs_well.map((name, i) => {
+              const key = Object.keys(ARCHETYPES).find(k => ARCHETYPES[k].name === name);
+              const paired = ARCHETYPES[key];
+              return (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <span style={{ fontSize: "1.4rem" }}>{paired.emoji}</span>
+                  <span style={{ color: "rgba(245,236,215,0.65)", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem" }}>The {paired.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
