@@ -510,7 +510,7 @@ function ArchetypeModal({ archetype, onClose }) {
           <h2 style={{ color: "#F5ECD7", fontFamily: "'Cormorant Garamond', Georgia, serif", fontWeight: 300, fontSize: "2.5rem", marginBottom: "0.25rem" }}>
             The {a.name}
           </h2>
-          <p style={{ color: a.color, fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", letterSpacing: "0.05em" }}>
+          <p style={{ color: a.color, fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", letterSpacing: "0.05em", fontWeight: 700 }}>
             {a.tagline}
           </p>
         </div>
@@ -925,7 +925,7 @@ function ResultScreen({ answers, onRetake }) {
           }}>
             The {p.name}
           </h1>
-          <p style={{ color: p.color, fontSize: "1rem", letterSpacing: "0.1em", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif" }}>
+          <p style={{ color: p.color, fontSize: "1rem", letterSpacing: "0.1em", fontStyle: "italic", fontFamily: "'Cormorant Garamond', serif", fontWeight: 700 }}>
             {p.tagline}
           </p>
         </div>
