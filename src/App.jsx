@@ -480,7 +480,7 @@ function ArchetypeModal({ archetype, onClose }) {
       <div
         onClick={e => e.stopPropagation()}
         style={{
-          background: `linear-gradient(160deg, #0f0c06 0%, ${a.color}22 50%, #0a1a0a 100%)`,
+          background: `linear-gradient(160deg, #1a1208 0%, #2d1f0a 60%, #1a2d1a 100%)`,
           border: `1px solid ${a.color}44`,
           borderRadius: "8px",
           padding: "2.5rem",
@@ -551,7 +551,7 @@ function ArchetypeModal({ archetype, onClose }) {
           </div>
         </div>
 
-        <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem" }}>
+        <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
           <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "0.75rem" }}>Pairs Well With</p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             {a.pairs_well.map((name, i) => {
@@ -566,6 +566,24 @@ function ArchetypeModal({ archetype, onClose }) {
             })}
           </div>
         </div>
+
+        {a.famous && a.famous.length > 0 && (
+          <div style={{ background: "rgba(245,236,215,0.02)", border: "1px solid rgba(245,236,215,0.06)", borderRadius: "6px", padding: "1.25rem 1.5rem" }}>
+            <p style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1rem" }}>Famous {a.plural || `${a.name}s`}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {a.famous.map((person, i) => (
+                <div key={i}>
+                  <p style={{ color: "#F5ECD7", fontFamily: "'Cormorant Garamond', serif", fontSize: "1rem", marginBottom: "0.15rem" }}>
+                    {person.name} <span style={{ color: "rgba(245,236,215,0.4)", fontSize: "0.85rem" }}>— {person.title}</span>
+                  </p>
+                  <p style={{ color: "rgba(245,236,215,0.55)", fontSize: "0.9rem", fontFamily: "'Cormorant Garamond', serif", lineHeight: 1.6, margin: 0, fontStyle: "italic" }}>
+                    {person.reason}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
