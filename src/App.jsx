@@ -1008,17 +1008,17 @@ function ResultScreen({ answers, onRetake }) {
               background: "linear-gradient(160deg, #1a1208 0%, #2d1f0a 40%, #1a2d1a 100%)",
               border: "1px solid rgba(245,236,215,0.2)",
               color: "rgba(245,236,215,0.5)",
-              fontSize: "0.85rem",
+              fontSize: "0.8rem",
               fontFamily: "'DM Sans', sans-serif",
-              letterSpacing: "0.08em",
+              letterSpacing: "0.12em",
               textTransform: "uppercase",
-              padding: "0.75rem 1.75rem",
-              borderRadius: "2px",
+              padding: "0.65rem 1.5rem",
+              borderRadius: "4px",
               cursor: "pointer",
               transition: "all 0.3s ease",
             }}
           >
-            ↩ Retake the Test
+            Retake the Test
           </button>
         </div>
         <Attribution />
