@@ -1025,8 +1025,7 @@ function ResultScreen({ answers, onRetake }) {
               const strengthsList = p.strengths.join(", ");
               const pairingsList = p.pairs_well.join(", ");
               const body =
-`My Spirit Animal Leadership Result
-===================================
+`I just took the Spirit Animal Leadership Test. Here are my results:
 
 ${p.emoji} The ${p.name} — ${p.tagline}
 
