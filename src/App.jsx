@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 import { track } from "@vercel/analytics";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://dxesjbhgvmhsotygkcak.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZXNqYmhndm1oc290eWdrY2FrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3NDg1MjUsImV4cCI6MjA5NzMyNDUyNX0.mUPCdDH8Rl3U8a2_gL6_tuu9qYe821lDzpH_h253Ko8"
+);
 
 // ─── ARCHETYPES ───────────────────────────────────────────────────────────────
 const ARCHETYPES = {
@@ -592,7 +598,18 @@ function ArchetypeModal({ archetype, onClose }) {
 function LandingScreen({ onStart }) {
   const [visible, setVisible] = useState(false);
   const [activeArchetype, setActiveArchetype] = useState(null);
+  const [stats, setStats] = useState(null);
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
+  useEffect(() => {
+    supabase.from("quiz_results").select("primary_archetype").then(({ data }) => {
+      if (!data) return;
+      const total = data.length;
+      const counts = {};
+      data.forEach(r => { counts[r.primary_archetype] = (counts[r.primary_archetype] || 0) + 1; });
+      const ranked = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      setStats({ total, ranked });
+    });
+  }, []);
 
   return (
     <div style={{
@@ -708,6 +725,32 @@ function LandingScreen({ onStart }) {
         </p>
       </div>
       {activeArchetype && <ArchetypeModal archetype={activeArchetype} onClose={() => setActiveArchetype(null)} />}
+
+      {stats && stats.total > 0 && (
+        <div style={{ marginTop: "3rem", width: "100%", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" }}>
+          <p style={{ textAlign: "center", color: "rgba(245,236,215,0.4)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>
+            {stats.total.toLocaleString()} {stats.total === 1 ? "quiz taken" : "quizzes taken"}
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            {stats.ranked.map(([archetype, count]) => {
+              const a = ARCHETYPES[archetype];
+              if (!a) return null;
+              const pct = Math.round((count / stats.total) * 100);
+              return (
+                <div key={archetype} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <span style={{ fontSize: "1rem", width: "1.5rem", textAlign: "center" }}>{a.emoji}</span>
+                  <span style={{ color: "rgba(245,236,215,0.5)", fontSize: "0.8rem", fontFamily: "'DM Sans', sans-serif", width: "5rem" }}>{a.name}</span>
+                  <div style={{ flex: 1, height: "3px", background: "rgba(245,236,215,0.08)", borderRadius: "2px" }}>
+                    <div style={{ width: `${pct}%`, height: "100%", background: a.color, borderRadius: "2px", opacity: 0.7 }} />
+                  </div>
+                  <span style={{ color: "rgba(245,236,215,0.35)", fontSize: "0.75rem", fontFamily: "'DM Sans', sans-serif", width: "2.5rem", textAlign: "right" }}>{pct}%</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <Attribution />
     </div>
   );
@@ -1165,7 +1208,15 @@ export default function App() {
       <GrainOverlay />
       {screen === "landing" && <LandingScreen onStart={() => setScreen("quiz")} />}
       {screen === "quiz" && (
-        <QuizScreen onComplete={(answers) => { setFinalAnswers(answers); setScreen("result"); }} />
+        <QuizScreen onComplete={(answers) => {
+          setFinalAnswers(answers);
+          setScreen("result");
+          const result = computeResult(answers);
+          supabase.from("quiz_results").insert({
+            primary_archetype: result.primary,
+            secondary_archetype: result.secondary || null,
+          }).then(() => {});
+        }} />
       )}
       {screen === "result" && (
         <ResultScreen answers={finalAnswers} onRetake={() => { setFinalAnswers([]); setScreen("landing"); }} />
