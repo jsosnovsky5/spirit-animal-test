@@ -728,8 +728,11 @@ function LandingScreen({ onStart }) {
 
       {stats && stats.total > 0 && (
         <div style={{ marginTop: "3rem", width: "100%", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" }}>
-          <p style={{ textAlign: "center", color: "rgba(245,236,215,0.4)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>
-            {stats.total.toLocaleString()} {stats.total === 1 ? "quiz taken" : "quizzes taken"}
+          <p style={{ textAlign: "center", color: "rgba(245,236,215,0.4)", fontSize: "0.78rem", fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+            History
+          </p>
+          <p style={{ textAlign: "center", color: "rgba(245,236,215,0.3)", fontSize: "0.75rem", fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.08em", marginBottom: "1.25rem" }}>
+            Tests Taken: {stats.total.toLocaleString()}
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
             {stats.ranked.map(([archetype, count]) => {
