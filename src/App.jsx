@@ -732,7 +732,7 @@ function LandingScreen({ onStart }) {
             History
           </p>
           <p style={{ textAlign: "center", color: "rgba(245,236,215,0.3)", fontSize: "0.75rem", fontFamily: "'DM Sans', sans-serif", letterSpacing: "0.08em", marginBottom: "1.25rem" }}>
-            Tests Taken: {stats.total.toLocaleString()}
+            All Tests Taken: {stats.total.toLocaleString()}
           </p>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
             {stats.ranked.map(([archetype, count]) => {
